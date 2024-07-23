@@ -8,7 +8,7 @@ def conectar_postgresql():
         conn = psycopg2.connect(
             dbname="arquivo",
             user="postgres",
-            password="050387",
+            password="",
             host="localhost",
             port="5432"
         )
