@@ -28,7 +28,7 @@ def inserir_cliente():
         cidade = entry_cidade.get()
         uf = entry_uf.get()
         data_abertura = entry_data_abertura.get()
-        data_fechamento = entry_data_fechamento.get()
+        data_fechamento = entry_data_fechamento.get() or None
         descricao = entry_descricao.get("1.0", tk.END).strip()
 
         if not n_processo or not nome or not cpf or not data_abertura:
@@ -54,7 +54,6 @@ def inserir_cliente():
                     conn.close()
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
-
 
 # Função para buscar um cliente no banco de dados
 def buscar_cliente():
@@ -88,7 +87,7 @@ def buscar_cliente():
                     entry_data_abertura.delete(0, tk.END)
                     entry_data_abertura.insert(0, cliente[7])
                     entry_data_fechamento.delete(0, tk.END)
-                    entry_data_fechamento.insert(0, cliente[8])
+                    entry_data_fechamento.insert(0, cliente[8] if cliente[8] is not None else "")
                     entry_descricao.delete("1.0", tk.END)
                     entry_descricao.insert(tk.END, cliente[9])
                     messagebox.showinfo("Sucesso", "Cliente encontrado!")
@@ -103,7 +102,6 @@ def buscar_cliente():
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
 
-
 # Função para atualizar um cliente no banco de dados
 def atualizar_cliente():
     try:
@@ -115,7 +113,7 @@ def atualizar_cliente():
         cidade = entry_cidade.get()
         uf = entry_uf.get()
         data_abertura = entry_data_abertura.get()
-        data_fechamento = entry_data_fechamento.get()
+        data_fechamento = entry_data_fechamento.get() or None
         descricao = entry_descricao.get("1.0", tk.END).strip()
 
         if not n_processo:
@@ -145,7 +143,6 @@ def atualizar_cliente():
                     conn.close()
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
-
 
 # Função para excluir um cliente do banco de dados
 def excluir_cliente():
